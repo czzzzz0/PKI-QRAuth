@@ -141,6 +141,10 @@ public class QRCodeAuthenticationController {
 	public String updateQRStatus(@RequestBody String data)
 			throws MalformedJsonException, IOException, CipherErrorException {
 
+		systemLogService.insertLogRecord(QRCodeAuthenticationController.class.getName(),
+				"updateQRStatus", SystemLogModel.INFO,
+				"Start update qr code status.");
+
 		return TokenUtils.tokenValidate(data,
 				systemLogService, tokenService,
 				userLogService, userKeyService,
@@ -249,7 +253,7 @@ public class QRCodeAuthenticationController {
 		int nonce = Integer.parseInt(requestMap.get("nonce2"));
 
 		systemLogService.insertLogRecord(QRCodeAuthenticationController.class.getName(),
-				"queryQRStatus", SystemLogModel.DEBUG, "nonce decryption complete.");
+				"queryQRStatus", SystemLogModel.DEBUG, "nonce parse complete.");
 
 		SystemKeyModel systemKeyModel = systemKeyService.getByApi(requestMap.get("system"));
 		PublicKey spub = SecurityFunctions.readPublicKey(systemKeyModel.getPublicKey());
