@@ -38,7 +38,7 @@ $(document).ready(function () {
                         $(".error_box").text("修改成功！");
                         update();
                         window.location.href = "home.html";
-                    } else if (data.status === -4) {
+                    } else if (data.status === -4 || msg.status === 1) {
                         logout();
                     } else if (data.status === -3) {
                         $(".error_box").text("修改失败，请刷新页面后重试");
@@ -106,9 +106,9 @@ function update() {
                         $("#email-input").val(payload.email);
                         $("#sex-input").val(sex[payload.sex]);
                     }
-                } else if (msg.status === -4) {
+                } else if (msg.status === -3 || msg.status === 1) {
                     logout();
-                } else if (msg.status === -3) {
+                } else if (msg.status === -4) {
                     $(".error_box").text("获取个人信息失败，请刷新页面重试！");
                 }
             }
